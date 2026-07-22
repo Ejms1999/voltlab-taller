@@ -1,17 +1,7 @@
+import jsPDF from "jspdf";
 import { LOGO_B64, TIPOS_FALLA } from "./constants.js";
 
-function cargarJsPDF() {
-  return new Promise((res,rej)=>{
-    if(window.jspdf){res(window.jspdf.jsPDF);return;}
-    const s=document.createElement("script");
-    s.src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js";
-    s.onload=()=>res(window.jspdf.jsPDF); s.onerror=rej;
-    document.head.appendChild(s);
-  });
-}
-
-async function generarPDF(r,{descargar=true,nOrdenParam=null}={}) {
-  const jsPDF=await cargarJsPDF();
+function generarPDF(r,{descargar=true,nOrdenParam=null}={}) {
   const doc=new jsPDF({unit:"mm",format:"a4"});
   const W=210,mg=18; let y=0;
   const AZUL=[30,80,180],VERDE=[22,160,90],ROJO=[200,40,40],GRIS_M=[120,130,150],GRIS=[100,110,130],FONDO=[240,245,255],BORDE=[200,210,230];
